@@ -14,7 +14,7 @@ interface Card {
   code: string;
 }
 
-interface DrawCardsResponse {
+export interface DrawCardsResponse {
   success: boolean;
   cards: Card[];
   deck_id: string;
@@ -25,7 +25,6 @@ export const fetchNewDeck = async (): Promise<NewDeckResponse> => {
   try {
     const response = await client('/new/shuffle/?deck_count=6');
 
-    console.log(response.data);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -39,9 +38,7 @@ export const drawCards = async (
 ): Promise<DrawCardsResponse> => {
   try {
     const response = await client(`/${deckId}/draw/?count=${numOfCards}`);
-
-    console.log(response.data);
-    return response.data;
+    return response.data.cards;
   } catch (err) {
     console.log(err);
     throw err;

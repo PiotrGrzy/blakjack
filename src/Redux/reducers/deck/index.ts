@@ -1,21 +1,21 @@
 import { NEW_DECK } from 'Redux/actions/deck/types';
 
-type DeckState = {
+export interface IDeckState {
   deckId: string | null;
   remaining: number;
   shuffled: boolean;
-};
+}
 
-type Action = {
+interface IAction {
   type: string;
   payload: {
     deck_id: string;
     remaining: number;
     shuffled: boolean;
   };
-};
+}
 
-const InitialState: DeckState = {
+const InitialState: IDeckState = {
   deckId: null,
   remaining: 0,
   shuffled: false,
@@ -23,8 +23,8 @@ const InitialState: DeckState = {
 
 export const deckReducer = (
   state = InitialState,
-  action: Action
-): DeckState => {
+  action: IAction
+): IDeckState => {
   switch (action.type) {
     case NEW_DECK: {
       // eslint-disable-next-line @typescript-eslint/naming-convention

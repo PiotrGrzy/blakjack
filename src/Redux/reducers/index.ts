@@ -6,3 +6,5 @@ export const rootReducer = combineReducers({
   players: playersReducer,
   deck: deckReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

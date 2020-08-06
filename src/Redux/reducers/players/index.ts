@@ -1,32 +1,43 @@
-import { ADD_PLAYER } from 'Redux/actions/players/types';
+import _ from 'lodash';
+import {
+  ADD_PLAYERS,
+  ADD_CARDS,
+  IPlayer,
+  PlayersReducerActions,
+} from 'Redux/actions/players/types';
 
-type Card = {
-  image: string;
-  value: string;
-  suit: string;
-  code: string;
-};
+export interface IPlayersState {
+  list: IPlayer[];
+  currentPlayerId: string | null;
+}
 
-type Action = {
-  type: string;
-  payload: PLayer;
-};
+const InitialState: IPlayersState = { list: [], currentPlayerId: null };
 
-type PLayer = {
-  id: string;
-  cards: Card[];
-  points: number;
-};
-
-type State = PLayer[];
-
-const InitialState: State = [];
-
-export const playersReducer = (state = InitialState, action: Action): State => {
+export const playersReducer = (
+  state = InitialState,
+  action: PlayersReducerActions
+): IPlayersState => {
   switch (action.type) {
-    case ADD_PLAYER:
-      return [...state, action.payload];
-
+    case ADD_PLAYERS:
+      return { list: action.payload, currentPlayerId: action.payload[0].id };
+    case ADD_CARDS: {
+      const playerWithNewCards = _.cloneDeep(state.list).find(
+        (player) => player.id === state.currentPlayerId
+      );
+      if (playerWithNewCards) {
+        const newCards = [...playerWithNewCards.cards, ...action.payload];
+        console.log(newCards);
+        return {
+          ...state,
+          list: state.list.map((player) =>
+            player.id !== state.currentPlayerId
+              ? player
+              : { ...playerWithNewCards, cards: newCards }
+          ),
+        };
+      }
+      return state;
+    }
     default:
       return state;
   }

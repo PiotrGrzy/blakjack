@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { getNewDeck } from 'Redux/actions/deck';
+import { addPlayers } from 'Redux/actions/players';
 
 type ButtonProps = {
   current?: boolean;
@@ -48,12 +49,8 @@ export const GameOptions: React.FC = () => {
   };
 
   const setGame = () => {
-    console.log(
-      `Starting new game with ${
-        gameMode === 'single' ? 1 : numOfPlayers
-      } players`
-    );
     dispatch(getNewDeck());
+    dispatch(addPlayers(numOfPlayers));
   };
 
   const handleStart = () => {

@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
+import { IPlayer } from 'Redux/reducers/players';
+
 export const getCardValue = (cardValue: string): number | undefined => {
   switch (cardValue) {
     case '1':
@@ -20,4 +23,13 @@ export const getCardValue = (cardValue: string): number | undefined => {
     default:
       return undefined;
   }
+};
+
+export const createPlayer = (): IPlayer => {
+  return {
+    id: uuidv4(),
+    cards: [],
+    points: 0,
+    status: 'playing',
+  };
 };
