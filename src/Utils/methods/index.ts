@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IPlayer } from 'Redux/reducers/players';
+import { IPlayer, ICard } from 'Redux/actions/players/types';
 
-export const getCardValue = (cardValue: string): number | undefined => {
+export const getCardValue = (cardValue: string): number => {
   switch (cardValue) {
     case '1':
     case '2':
@@ -20,16 +20,31 @@ export const getCardValue = (cardValue: string): number | undefined => {
       return 3;
     case 'KING':
       return 4;
+    case 'ACE':
+      return 11;
     default:
-      return undefined;
+      return 0;
   }
 };
 
-export const createPlayer = (): IPlayer => {
+export const countPlayersPoints = (
+  cards: ICard[]
+): { points: number; status: string } => {
+  const playerPoints = cards.reduce(
+    (totalPoints, card) => totalPoints + getCardValue(card.value),
+    0
+  );
+  if (playerPoints > 21) return { points: playerPoints, status: 'lost' };
+  if (playerPoints === 21) return { points: playerPoints, status: 'won' };
+  return { points: playerPoints, status: 'playing' };
+};
+
+export const createPlayer = (i: number): IPlayer => {
   return {
     id: uuidv4(),
     cards: [],
     points: 0,
     status: 'playing',
+    index: i,
   };
 };

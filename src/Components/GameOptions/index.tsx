@@ -40,7 +40,7 @@ const StyledBtn = styled.button<ButtonProps>`
 export const GameOptions: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [gameMode, setGameMode] = useState('single');
-  const [numOfPlayers, setNumOfPlayers] = useState(1);
+  const [numOfPlayers, setNumOfPlayers] = useState(2);
 
   const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export const GameOptions: React.FC = () => {
 
   const setGame = () => {
     dispatch(getNewDeck());
-    dispatch(addPlayers(numOfPlayers));
+    dispatch(addPlayers(gameMode === 'single' ? 1 : numOfPlayers));
   };
 
   const handleStart = () => {
