@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { fetchNewDeck } from 'Api/cardsApi';
 
-import { NEW_DECK, NEW_DECK_FAILURE } from './types';
+import { NEW_DECK, NEW_DECK_FAILURE, END_GAME, EndGameAction } from './types';
 
 export const getNewDeck = () => async (
   dispatch: Dispatch<Action>
@@ -13,4 +13,8 @@ export const getNewDeck = () => async (
   } catch (err) {
     dispatch({ type: NEW_DECK_FAILURE, payload: err });
   }
+};
+
+export const endGame = (): EndGameAction => {
+  return { type: END_GAME };
 };

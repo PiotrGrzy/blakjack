@@ -38,7 +38,7 @@ interface Props {
 }
 
 export const Player: React.FC<Props> = ({ player }: Props) => {
-  const { cards, points, status, index } = player;
+  const { cards, points, id } = player;
   const deckId = useSelector((state: RootState) => state.deck.deckId);
   const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ export const Player: React.FC<Props> = ({ player }: Props) => {
       dispatch(addCards(2, deckId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deckId]);
+  }, [deckId, id]);
 
   const handleHit = () => {
     if (deckId) {
@@ -59,9 +59,9 @@ export const Player: React.FC<Props> = ({ player }: Props) => {
     dispatch(playersStands());
   };
 
-  if (status === 'passed' || status === 'lost') {
-    dispatch(setNextPlayer(index + 1));
-  }
+  // if (status === 'passed' || status === 'lost') {
+  //   dispatch(setNextPlayer(index + 1));
+  // }
   return (
     <StyledPlayer>
       <PlayersActionsContainer>

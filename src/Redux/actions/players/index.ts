@@ -32,8 +32,9 @@ export const addCards = (numOfCards: number, deckId: string) => async (
     if (numOfCards === 2 && cards.cards.every((card) => card.value === 'ACE')) {
       dispatch({ type: PLAYER_WON });
     }
-    dispatch({ type: ADD_CARDS, payload: cards });
+    dispatch({ type: ADD_CARDS, payload: cards.cards });
   } catch (err) {
+    console.log(err);
     dispatch({ type: ADD_CARDS_FAILURE, payload: err });
   }
 };

@@ -38,7 +38,7 @@ export const drawCards = async (
 ): Promise<DrawCardsResponse> => {
   try {
     const response = await client(`/${deckId}/draw/?count=${numOfCards}`);
-    return response.data.cards;
+    return response.data;
   } catch (err) {
     console.log(err);
     throw err;
