@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-
-import { addCards, playersStands, setNextPlayer } from 'Redux/actions/players';
+import { Button } from 'Styles/components';
+import { addCards, playersStands } from 'Redux/actions/players';
 import { RootState } from 'Redux/reducers';
-import { CardsContainer } from 'Components/CardsContainer';
+import { Cards } from 'Components/Cards';
 import { IPlayer } from 'Redux/actions/players/types';
 
 type ButtonProps = {
@@ -13,24 +13,24 @@ type ButtonProps = {
 
 const StyledPlayer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  p {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
 `;
 
 const PlayersActionsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
 `;
 
-const PlayerButton = styled.button<ButtonProps>`
-  cursor: pointer;
-  width: 10rem;
-  padding: 2rem;
-  border-radius: 10px;
-  color: ${(props) => (props.hit ? 'blue' : 'white')};
-  background-color: ${(props) => (props.hit ? 'yellow' : 'grey')};
-  border: none;
+const PlayerButton = styled(Button)<ButtonProps>`
+  color: ${(props) => (props.hit ? '#7596f0' : '#f57369')};
+  width: 12rem;
 `;
 
 interface Props {
@@ -49,6 +49,10 @@ export const Player: React.FC<Props> = ({ player }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deckId, id]);
 
+  if (points === 21) {
+    dispatch(playersStands());
+  }
+
   const handleHit = () => {
     if (deckId) {
       dispatch(addCards(1, deckId));
@@ -59,18 +63,15 @@ export const Player: React.FC<Props> = ({ player }: Props) => {
     dispatch(playersStands());
   };
 
-  // if (status === 'passed' || status === 'lost') {
-  //   dispatch(setNextPlayer(index + 1));
-  // }
   return (
     <StyledPlayer>
       <PlayersActionsContainer>
+        <PlayerButton onClick={handleStand}>Stand</PlayerButton>
         <PlayerButton hit onClick={handleHit}>
           Hit
         </PlayerButton>
-        <PlayerButton onClick={handleStand}>Stand</PlayerButton>
       </PlayersActionsContainer>
-      <CardsContainer cards={cards} />
+      <Cards cards={cards} />
       <p>Points: {points}</p>
     </StyledPlayer>
   );

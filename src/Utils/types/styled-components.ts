@@ -2,33 +2,21 @@ import 'styled-components';
 
 declare module 'styled-components' {
   interface IColors {
+    gold: string;
     black: string;
-    green: string;
+    white: string;
+    grey: string;
   }
 
-  //   interface ILayout {
-  //     headerHeight: string;
-  //     footerHeight: string;
-  //   }
-
-  //   interface IZIndex {
-  //     layout: number;
-  //     modal: number;
-  //   }
-
   interface IFontSize {
-    // textRegular: string;
-    // textButton: string;
-    // textFormTitle: string;
-    // formMessage: string;
     link: string;
+    normal: string;
+    large: string;
   }
 
   interface ITheme {
     colors: IColors;
     fontSize: IFontSize;
-    // layout: ILayout;
-    // zIndex: IZIndex;
   }
 
   interface IStyledComponentWithTheme {

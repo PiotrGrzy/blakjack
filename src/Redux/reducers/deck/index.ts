@@ -1,8 +1,4 @@
-import {
-  NEW_DECK,
-  END_GAME,
-  DeckReducerActions,
-} from 'Redux/actions/deck/types';
+import { NEW_DECK, DeckReducerActions } from 'Redux/actions/deck/types';
 
 export interface IDeckState {
   deckId: string | null;
@@ -33,12 +29,6 @@ export const deckReducer = (
         gameOn: true,
       };
     }
-    case END_GAME:
-      return {
-        ...state,
-        gameOn: false,
-      };
-
     default:
       return state;
   }

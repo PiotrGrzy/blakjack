@@ -6,20 +6,32 @@ import { IPlayer } from 'Redux/actions/players/types';
 import { RootState } from 'Redux/reducers';
 
 const StyledList = styled.div`
+  margin-top: 4rem;
   ul {
-    display: flex;
-    justify-items: flex-end;
-    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2rem;
+    @media only screen and (max-width: 649px) {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: row;
+    }
   }
 `;
 
 export const PlayersList: React.FC = () => {
-  const players = useSelector((state: RootState) => state.players.list);
+  const { list, currentPlayerId } = useSelector(
+    (state: RootState) => state.players
+  );
+
   return (
     <StyledList>
       <ul>
-        {players.map((player: IPlayer, i: number) => (
-          <PlayersListElement player={player} index={i} key={player.id} />
+        {list.map((player: IPlayer) => (
+          <PlayersListElement
+            player={player}
+            key={player.id}
+            current={currentPlayerId}
+          />
         ))}
       </ul>
     </StyledList>

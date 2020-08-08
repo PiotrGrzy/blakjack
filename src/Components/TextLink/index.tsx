@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
   ${({ theme }: IStyledComponentWithTheme) => css`
-    color: ${theme.colors.black};
+    color: ${theme.colors.gold};
     display: inline-block;
     font-size: ${theme.fontSize.link};
     height: min-content;
     text-decoration: none;
     width: max-content;
-    padding: 5px;
+    padding: 2rem;
+    background-color: #101110;
+    border-radius: 2rem;
+    box-shadow: 0 5px 15px 15px rgba(0, 0, 0, 0.2);
+    transition: color 0.2s;
+    &:hover {
+      color: ${theme.colors.white};
+    }
   `}
 `;
 

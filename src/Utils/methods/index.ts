@@ -48,3 +48,19 @@ export const createPlayer = (i: number): IPlayer => {
     index: i,
   };
 };
+
+export const checkWinner = (players: IPlayer[]): IPlayer[] => {
+  const availablePlayersPoints = players
+    .filter((player) => player.status !== 'lost')
+    .map((player) => player.points);
+
+  const maxPoints = Math.max(...availablePlayersPoints);
+  return players.filter((player) => player.points === maxPoints);
+};
+
+export const CheckIfLastPlaying = (players: IPlayer[]): boolean => {
+  const isLast = players
+    .slice(0, -1)
+    .every((player) => player.status === 'lost');
+  return isLast;
+};

@@ -5,15 +5,21 @@ import {
   PLAYER_STANDS,
   PLAYER_WON,
   SET_NEXT_PLAYER,
+  SET_LOADING,
+  RESET_PLAYERS,
 } from 'Redux/actions/players/types';
 import { countPlayersPoints } from 'Utils/methods';
 
-const InitialState = { list: [], currentPlayerId: null };
+const InitialState = { list: [], currentPlayerId: null, loading: false };
 
 export const playersReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS:
-      return { list: action.payload, currentPlayerId: action.payload[0].id };
+      return {
+        ...state,
+        list: action.payload,
+        currentPlayerId: action.payload[0].id,
+      };
     case ADD_CARDS: {
       const playerWithNewCards = _.cloneDeep(state.list).find(
         (player) => player.id === state.currentPlayerId
@@ -23,6 +29,7 @@ export const playersReducer = (state = InitialState, action) => {
         const { points, status } = countPlayersPoints(newCards);
         return {
           ...state,
+          loading: false,
           list: state.list.map((player) =>
             player.id !== state.currentPlayerId
               ? player
@@ -47,7 +54,7 @@ export const playersReducer = (state = InitialState, action) => {
         ...state,
         list: state.list.map((player) =>
           player.id !== state.currentPlayerId
-            ? player
+            ? { ...player, status: 'lost' }
             : { ...player, status: 'won' }
         ),
       };
@@ -57,6 +64,15 @@ export const playersReducer = (state = InitialState, action) => {
         ...state,
         currentPlayerId: state.list[action.payload].id,
       };
+    }
+    case SET_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case RESET_PLAYERS: {
+      return InitialState;
     }
     default:
       return state;

@@ -1,6 +1,5 @@
 export const NEW_DECK = 'NEW_DECK';
 export const NEW_DECK_FAILURE = 'ADD_DECK_FAILURE';
-export const END_GAME = 'END_GAME';
 
 export interface NewDeckAction {
   type: typeof NEW_DECK;
@@ -10,8 +9,9 @@ export interface NewDeckAction {
     shuffled: boolean;
   };
 }
-export interface EndGameAction {
-  type: typeof END_GAME;
+
+export interface DeckFailureAction {
+  type: typeof NEW_DECK_FAILURE;
 }
 
-export type DeckReducerActions = NewDeckAction | EndGameAction;
+export type DeckReducerActions = NewDeckAction;
