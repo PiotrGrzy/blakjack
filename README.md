@@ -14,7 +14,7 @@
 - fix cards animation
 - add bot for single player ( wasnt mentioned in original task description)
 
-## Project can be launched live at [Netlify](https://unruffled-kowalevski-4127a0.netlify.app/options)
+## Project can be launched live at [Netlify](https://unruffled-kowalevski-4127a0.netlify.app)
 
 ## Running project locally 
 
