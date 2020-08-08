@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css, IStyledComponentWithTheme } from 'styled-components';
+import { RootState } from 'Redux/reducers';
 import { getNewDeck } from 'Redux/actions/deck';
 import { addPlayers } from 'Redux/actions/players';
 import { SubHeading, Container, Button } from 'Styles/components';
@@ -32,6 +33,7 @@ const StyledSelect = styled.select`
 `;
 
 export const Options: React.FC = () => {
+  const deckId = useSelector((state: RootState) => state.deck.deckId);
   const [gameMode, setGameMode] = useState('single');
   const [numOfPlayers, setNumOfPlayers] = useState(2);
   const history = useHistory();
@@ -43,7 +45,10 @@ export const Options: React.FC = () => {
   };
 
   const setGame = () => {
-    dispatch(getNewDeck());
+    if (deckId == null) {
+      dispatch(getNewDeck());
+    }
+
     dispatch(addPlayers(numOfPlayers));
     history.push('/game');
   };
