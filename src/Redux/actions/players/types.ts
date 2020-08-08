@@ -19,7 +19,7 @@ export interface IPlayer {
   id: string;
   cards: ICard[];
   points: number;
-  status: 'playing' | 'won' | 'lost' | 'passed';
+  status: string;
   index: number;
 }
 
@@ -54,8 +54,9 @@ export interface ResetPlayersAction {
 
 export type PlayersReducerActions =
   | AddCardsAction
-  | AddCardsAction
+  | AddPlayersAction
   | PlayerStandsAction
   | SetNextPlayerAction
   | SetLoadingAction
-  | ResetPlayersAction;
+  | ResetPlayersAction
+  | PlayerWonAction;

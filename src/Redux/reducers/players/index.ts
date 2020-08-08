@@ -7,12 +7,28 @@ import {
   SET_NEXT_PLAYER,
   SET_LOADING,
   RESET_PLAYERS,
+  PlayersReducerActions,
+  IPlayer,
 } from 'Redux/actions/players/types';
+
 import { countPlayersPoints } from 'Utils/methods';
 
-const InitialState = { list: [], currentPlayerId: null, loading: false };
+export interface IPlayerState {
+  list: IPlayer[];
+  currentPlayerId?: string | null;
+  loading: boolean;
+}
 
-export const playersReducer = (state = InitialState, action) => {
+const InitialState: IPlayerState = {
+  list: [],
+  currentPlayerId: null,
+  loading: false,
+};
+
+export const playersReducer = (
+  state = InitialState,
+  action: PlayersReducerActions
+): IPlayerState => {
   switch (action.type) {
     case ADD_PLAYERS:
       return {

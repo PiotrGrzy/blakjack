@@ -41,7 +41,7 @@ const StyledLi = styled.li<LiProps>`
 
 interface Props {
   player: IPlayer;
-  current?: string;
+  current?: string | null;
 }
 
 export const PlayersListElement: React.FC<Props> = ({
