@@ -11,16 +11,16 @@
 ### Project isnt done in 100%, the TODO list contains:
 
 - add tests,
-- fix cards animation
 - add bot for single player ( wasnt mentioned in original task description)
 
 ## Project can be launched live at [Netlify](https://unruffled-kowalevski-4127a0.netlify.app)
 
-## Running project locally 
+## Running project locally
 
 Clone repository and launch `npm install` to install all dependencies. Then follow default CRA instruction
 
 ## Default CRA instruction
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

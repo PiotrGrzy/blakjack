@@ -9,14 +9,12 @@ interface Props {
 
 const flip = keyframes`
      from {
-     rotateY(0);
+    transform: rotateY(0);
     }
-    
     to {
-      rotateY(180deg);
+    transform:  rotateY(180deg);
     }
-  
-`;
+  `;
 
 const FlipCard = styled.div`
   background-color: transparent;
@@ -33,7 +31,7 @@ const FlipCardInner = styled.div`
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  animation: 3s ease-in 1s infinite ${flip};
+  animation: 0.5s ease-in 1 reverse ${flip};
 `;
 
 const FlipCardFront = styled.div`
