@@ -5,7 +5,7 @@ import { Game } from 'Pages/Game';
 import { Results } from 'Pages/Results';
 import { Options } from 'Pages/Options';
 
-export const Router = () => (
+export const Router: () => JSX.Element = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Home} />
