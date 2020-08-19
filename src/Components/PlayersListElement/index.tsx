@@ -49,7 +49,11 @@ export const PlayersListElement: React.FC<Props> = ({
   current,
 }: Props) => {
   return (
-    <StyledLi status={player.status} active={player.id === current}>
+    <StyledLi
+      data-testid="player-list-element"
+      status={player.status}
+      active={player.id === current}
+    >
       <h3>Player {player.index + 1}</h3>
       <p>Points: {player.points}</p>
       <p>Status: {player.status}</p>
